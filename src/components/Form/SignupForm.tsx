@@ -16,9 +16,14 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { Input } from '../ui/input';
 import { InputPrime } from '../ui/input-prime';
 import { Button } from '../ui/button';
+import services from '@/utils/service';
+import { setCookie } from 'cookies-next';
+import { toast } from 'sonner';
+import { useRouter } from 'next/router';
 
 const SignupForm = () => {
   const [showPasswod, setShowPassword] = useState<boolean>(false);
+  const router = useRouter();
   const onToggleShowPassword = () => {
     setShowPassword((prev) => !prev);
   };
@@ -42,12 +47,21 @@ const SignupForm = () => {
     resolver: zodResolver(signupFormSchema),
     defaultValues: {
       name: '',
+      email: '',
       password: '',
     },
   });
 
   async function onSubmit(values: z.infer<typeof signupFormSchema>) {
-    console.log(values);
+    // console.log(values);
+    const res = await services.postSignup(values);
+    if (res.error) {
+      console.log(res.message);
+    }
+    console.log(res.data?.token);
+    setCookie('token', res.data?.token);
+    toast.success(res.message);
+    router.push('/');
   }
   return (
     <div className="shadow-drop-line mt-5 w-[80vw] rounded-lg border-[1px] border-border bg-background p-5 lg:mt-0 lg:w-[30rem]">
