@@ -53,11 +53,24 @@ const services = (() => {
     );
   };
 
+  const deleteOrderBook = async (payload: string) => {
+    return fetchWithToken<SuccessOrderResponse>(
+      `${process.env.BASE_API_URL}/api/orders/${payload}`,
+      {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }
+    );
+  };
+
   return {
     postSignup,
     getUserData,
     postLogin,
     postOrderBook,
+    deleteOrderBook,
   };
 })();
 

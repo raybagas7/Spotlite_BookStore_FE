@@ -2,8 +2,8 @@ import { ReactElement, useEffect, useState } from 'react';
 import MainLayout from '@/components/Layout/MainLayout';
 import { fetchBooks } from '@/actions/fetch-books';
 import LoadMore from '@/components/LoadMore';
-import { useUser } from '@/store/useUser';
 import AsideInformation from '@/components/AsideInformation';
+import Spinner from '@/components/ui/spinner';
 
 export default function Home() {
   const [books, setBooks] = useState<Book[]>([]);
@@ -20,7 +20,7 @@ export default function Home() {
   }, []);
 
   if (!books) {
-    return null;
+    return <Spinner />;
   }
   return (
     <main className="container mx-auto p-4 min-h-screen max-w-5xl mt-10">

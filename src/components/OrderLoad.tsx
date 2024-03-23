@@ -1,32 +1,30 @@
-'use client';
+import { fetchOrders } from '@/actions/fetch-orders';
+import { delay } from '@/lib/utils';
+import { useUser } from '@/store/useUser';
 import React, { useEffect, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
 import Spinner from './ui/spinner';
-import { fetchBooks } from '@/actions/fetch-books';
-import Books from './Books';
-import { delay } from '@/lib/utils';
-import { useUser } from '@/store/useUser';
+import Orders from './Orders';
 
-interface ILoadMore {
-  books: Book[];
-  setBooks: React.Dispatch<React.SetStateAction<Book[]>>;
+interface IOrderLoad {
+  orders: Order[];
+  setOrders: React.Dispatch<React.SetStateAction<Order[]>>;
 }
 
-const LoadMore = ({ books, setBooks }: ILoadMore) => {
+const OrderLoad = ({ orders, setOrders }: IOrderLoad) => {
   const [pagesLoaded, setPagesLoaded] = useState(1);
   const [keepLoad, setKeepload] = useState(true);
   const [preventLoad, setPreventLoad] = useState(false);
-  const { userData } = useUser();
 
   const { ref, inView } = useInView();
 
   useEffect(() => {
-    const loadMoreBooks = async () => {
+    const loadMoreOrders = async () => {
       await delay(2000);
       const nextPage = pagesLoaded + 1;
-      const newBooks = (await fetchBooks(nextPage, 9)) ?? [];
+      const newBooks = (await fetchOrders(nextPage, 12)) ?? [];
 
-      setBooks((prev: Book[]) => [...prev, ...newBooks]);
+      setOrders((prev: Order[]) => [...prev, ...newBooks]);
       setPagesLoaded(nextPage);
       if (newBooks.length === 0) {
         setKeepload(false);
@@ -36,7 +34,7 @@ const LoadMore = ({ books, setBooks }: ILoadMore) => {
     if (inView) {
       if (!preventLoad) {
         setPreventLoad(true);
-        loadMoreBooks();
+        loadMoreOrders();
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -44,9 +42,9 @@ const LoadMore = ({ books, setBooks }: ILoadMore) => {
 
   return (
     <>
-      <Books books={books} userData={userData} />
+      <Orders orders={orders} setOrders={setOrders} />
       <div
-        className="flex justify-center items-center p-4 col-span-1 sm:col-span-2 md:col-span-3"
+        className="flex justify-center items-center p-4 col-span-1 sm:col-span-2 md:col-span-4"
         ref={ref}
       >
         {keepLoad && <Spinner />}
@@ -55,4 +53,4 @@ const LoadMore = ({ books, setBooks }: ILoadMore) => {
   );
 };
 
-export default LoadMore;
+export default OrderLoad;

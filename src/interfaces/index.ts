@@ -8,6 +8,28 @@ interface Book {
   updatedAt: string;
 }
 
+interface BookOrder {
+  book_id: string;
+  title: string;
+  cover: string;
+}
+
+interface WriterOrder {
+  id: string;
+  name: string;
+  email: string;
+}
+
+interface Order {
+  order_id: string;
+  book_id: string;
+  customer_id: string;
+  writer_id: string;
+  point: number;
+  book: BookOrder;
+  writer: WriterOrder;
+}
+
 interface IUserData {
   id: string;
   name: string;
