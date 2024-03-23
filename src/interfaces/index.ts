@@ -7,3 +7,13 @@ interface Book {
   createdAt: string;
   updatedAt: string;
 }
+
+interface IUserData {
+  id: string;
+  name: string;
+  email: string;
+  role: string;
+  point: number;
+  createdAt: string;
+  updatedAt: string;
+}

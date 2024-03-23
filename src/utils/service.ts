@@ -15,9 +15,21 @@ const services = (() => {
     );
   };
 
-  const getBooksByPage = async (page: number, size: number) => {
-    return fetchWithToken<Book[]>(
-      `${process.env.BASE_API_URL}?page=${page}$size=${size}`,
+  // const getBooksByPage = async (page: number, size: number) => {
+  //   return fetchWithToken<Book[]>(
+  //     `${process.env.BASE_API_URL}?page=${page}$size=${size}`,
+  //     {
+  //       method: 'GET',
+  //       headers: {
+  //         'Content-Type': 'application/json', // Specify the content type of the request body
+  //       },
+  //     }
+  //   );
+  // };
+
+  const getUserData = async () => {
+    return fetchWithToken<IUserData>(
+      `${process.env.BASE_API_URL}/auth/profile`,
       {
         method: 'GET',
         headers: {
@@ -29,7 +41,7 @@ const services = (() => {
 
   return {
     postSignup,
-    getBooksByPage,
+    getUserData,
   };
 })();
 

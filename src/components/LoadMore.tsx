@@ -38,6 +38,7 @@ const LoadMore = ({ books, setBooks }: LoadMore) => {
         loadMoreBooks();
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [inView]);
 
   return (

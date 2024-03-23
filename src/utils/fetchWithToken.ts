@@ -1,8 +1,10 @@
+import { getCookie } from 'cookies-next';
+
 export async function fetchWithToken<T>(
   url: string,
   options: RequestInit = {}
-): Promise<T> {
-  const token = 'your_token_here';
+): Promise<{ error: boolean; data: T | null; message: string }> {
+  const token = getCookie('token');
 
   const headers: HeadersInit = {
     Authorization: `Bearer ${token}`,
@@ -12,13 +14,19 @@ export async function fetchWithToken<T>(
 
   try {
     const response = await fetch(url, { ...options, headers });
+    const responseData = await response.json();
+
     if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
+      return { error: true, data: null, message: responseData.message };
+    } else {
+      return {
+        error: false,
+        data: responseData.data,
+        message: responseData.message,
+      };
     }
-    const data = await response.json();
-    return data;
   } catch (error) {
     console.error('Error:', error);
-    throw error;
+    return { error: true, data: null, message: 'Error Server' };
   }
 }
