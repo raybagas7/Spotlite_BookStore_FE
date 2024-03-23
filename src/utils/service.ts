@@ -65,12 +65,36 @@ const services = (() => {
     );
   };
 
+  const getTags = async () => {
+    return fetchWithoutToken<Tag[]>(`${process.env.BASE_API_URL}/api/tags`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+  };
+
+  const postNewBook = async (payload: NewBookPayload) => {
+    return fetchWithToken<SuccessAddNewBookResponse>(
+      `${process.env.BASE_API_URL}/api/books`,
+      {
+        method: 'POST',
+        body: JSON.stringify(payload),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }
+    );
+  };
+
   return {
     postSignup,
     getUserData,
     postLogin,
     postOrderBook,
     deleteOrderBook,
+    getTags,
+    postNewBook,
   };
 })();
 

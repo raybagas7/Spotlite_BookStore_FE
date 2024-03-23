@@ -15,6 +15,13 @@ interface OrderPayload {
   point: number;
 }
 
+interface NewBookPayload {
+  title: string;
+  cover: string;
+  point: number;
+  tags: string[];
+}
+
 interface UserData {
   id: string;
   name: string;
@@ -41,4 +48,13 @@ interface SuccessOrderResponse {
   point: number;
   writer_id: string;
   order_id: string;
+}
+interface SuccessAddNewBookResponse {
+  title: string;
+  cover: string;
+  point: number;
+  writer_id: string;
+  book_id: string;
+  createdAt: string;
+  updatedAt: string;
 }
