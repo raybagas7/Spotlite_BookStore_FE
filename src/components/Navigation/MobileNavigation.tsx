@@ -2,7 +2,7 @@ import React from 'react';
 import { FaUserAlt } from 'react-icons/fa';
 import { IoMdLogOut, IoIosHome } from 'react-icons/io';
 import Link from 'next/link';
-import { deleteCookie, getCookie } from 'cookies-next';
+import { deleteCookie } from 'cookies-next';
 import { useRouter } from 'next/router';
 
 const MobileNavigation = () => {

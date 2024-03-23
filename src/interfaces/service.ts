@@ -3,18 +3,27 @@ interface SignUpPayload {
   email: string;
   password: string;
 }
+interface LoginUpPayload {
+  email: string;
+  password: string;
+}
 
 interface UserData {
-  email: string;
   id: string;
   name: string;
-  point: number;
+  email: string;
   role: string;
+  point: number;
   createdAt: string;
   updatedAt: string;
 }
 
 interface SignupResponse {
+  token: string;
+  user: UserData;
+}
+
+interface LoginResponse {
   token: string;
   user: UserData;
 }

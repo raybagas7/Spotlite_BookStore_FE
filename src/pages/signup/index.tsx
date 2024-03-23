@@ -1,10 +1,9 @@
 import SignupForm from '@/components/Form/SignupForm';
-import HeaderLined from '@/components/HeaderLined';
 import { ModeToggle } from '@/components/ui/mode-toggle';
 import { ThemeProvider } from '@/components/ui/theme-provider';
 import Head from 'next/head';
-import React from 'react';
 import { Toaster } from 'sonner';
+import React from 'react';
 
 const Signup = () => {
   return (
