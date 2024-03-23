@@ -5,6 +5,7 @@ import Spinner from './ui/spinner';
 import { fetchBooks } from '@/actions/fetch-books';
 import Books from './Books';
 import { delay } from '@/lib/utils';
+import { useUser } from '@/store/useUser';
 
 interface LoadMore {
   books: Book[];
@@ -15,6 +16,7 @@ const LoadMore = ({ books, setBooks }: LoadMore) => {
   const [pagesLoaded, setPagesLoaded] = useState(1);
   const [keepLoad, setKeepload] = useState(true);
   const [preventLoad, setPreventLoad] = useState(false);
+  const { userData } = useUser();
 
   const { ref, inView } = useInView();
 
@@ -32,7 +34,6 @@ const LoadMore = ({ books, setBooks }: LoadMore) => {
       setPreventLoad(false);
     };
     if (inView) {
-      console.log('scrolled to the end');
       if (!preventLoad) {
         setPreventLoad(true);
         loadMoreBooks();
@@ -43,7 +44,7 @@ const LoadMore = ({ books, setBooks }: LoadMore) => {
 
   return (
     <>
-      <Books books={books} />
+      <Books books={books} userData={userData} />
       <div
         className="flex justify-center items-center p-4 col-span-1 sm:col-span-2 md:col-span-3"
         ref={ref}

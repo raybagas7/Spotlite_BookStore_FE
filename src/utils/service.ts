@@ -9,7 +9,7 @@ const services = (() => {
         method: 'POST',
         body: JSON.stringify(payload),
         headers: {
-          'Content-Type': 'application/json', // Specify the content type of the request body
+          'Content-Type': 'application/json',
         },
       }
     );
@@ -22,23 +22,11 @@ const services = (() => {
         method: 'POST',
         body: JSON.stringify(payload),
         headers: {
-          'Content-Type': 'application/json', // Specify the content type of the request body
+          'Content-Type': 'application/json',
         },
       }
     );
   };
-
-  // const getBooksByPage = async (page: number, size: number) => {
-  //   return fetchWithToken<Book[]>(
-  //     `${process.env.BASE_API_URL}?page=${page}$size=${size}`,
-  //     {
-  //       method: 'GET',
-  //       headers: {
-  //         'Content-Type': 'application/json', // Specify the content type of the request body
-  //       },
-  //     }
-  //   );
-  // };
 
   const getUserData = async () => {
     return fetchWithToken<IUserData>(
@@ -46,7 +34,20 @@ const services = (() => {
       {
         method: 'GET',
         headers: {
-          'Content-Type': 'application/json', // Specify the content type of the request body
+          'Content-Type': 'application/json',
+        },
+      }
+    );
+  };
+
+  const postOrderBook = async (payload: OrderPayload) => {
+    return fetchWithToken<SuccessOrderResponse>(
+      `${process.env.BASE_API_URL}/api/orders`,
+      {
+        method: 'POST',
+        body: JSON.stringify(payload),
+        headers: {
+          'Content-Type': 'application/json',
         },
       }
     );
@@ -56,6 +57,7 @@ const services = (() => {
     postSignup,
     getUserData,
     postLogin,
+    postOrderBook,
   };
 })();
 

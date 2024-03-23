@@ -3,8 +3,8 @@ import TopNavigation from './TopNavigation';
 import MobileNavigation from './MobileNavigation';
 import { useUser } from '@/store/useUser';
 import Link from 'next/link';
-import { FaUserAlt } from 'react-icons/fa';
-import { IoIosHome, IoMdLogIn, IoMdLogOut } from 'react-icons/io';
+import { IoMdLogIn } from 'react-icons/io';
+import { Toaster } from 'sonner';
 // import { useUser } from '@/store/user/useUser';
 // import AdminTopNavigation from './AdminTopNavigation';
 // import AdminMobileNavigation from './AdminMobileNavigation';
@@ -57,6 +57,7 @@ const MainNavigation = () => {
     <>
       <TopNavigation />
       <MobileNavigation />
+      <Toaster richColors closeButton />
     </>
   );
 };

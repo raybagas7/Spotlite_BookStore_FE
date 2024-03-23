@@ -8,6 +8,12 @@ interface LoginUpPayload {
   password: string;
 }
 
+interface OrderPayload {
+  book_id: string;
+  writer_id: string;
+  point: number;
+}
+
 interface UserData {
   id: string;
   name: string;
@@ -26,4 +32,12 @@ interface SignupResponse {
 interface LoginResponse {
   token: string;
   user: UserData;
+}
+
+interface SuccessOrderResponse {
+  book_id: string;
+  customer_id: string;
+  point: number;
+  writer_id: string;
+  order_id: string;
 }

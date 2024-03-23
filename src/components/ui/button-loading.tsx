@@ -6,6 +6,7 @@ import { useLoading } from '@/store/useLoading';
 interface IButtonWithLoading
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   buttonContent?: React.ReactNode;
+  disabledContent?: React.ReactNode;
   loadingContent?: React.ReactNode;
   variant?:
     | 'default'
@@ -18,6 +19,7 @@ interface IButtonWithLoading
 
 const ButtonWithLoading = ({
   buttonContent,
+  disabledContent,
   loadingContent,
   children,
   type = 'submit',
@@ -36,11 +38,19 @@ const ButtonWithLoading = ({
       >
         {buttonLoading ? (
           <>
-            <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />
+            <ReloadIcon
+              className={`h-4 w-4 animate-spin ${loadingContent && 'mr-2'}`}
+            />
             {loadingContent && loadingContent}
           </>
         ) : (
-          <>{buttonContent && buttonContent}</>
+          <>
+            {disabled
+              ? disabledContent
+                ? disabledContent
+                : buttonContent
+              : buttonContent && buttonContent}
+          </>
         )}
         {children}
       </Button>
