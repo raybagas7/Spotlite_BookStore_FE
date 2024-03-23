@@ -4,11 +4,14 @@ import { IoMdLogOut, IoIosHome } from 'react-icons/io';
 import Link from 'next/link';
 import { deleteCookie } from 'cookies-next';
 import { useRouter } from 'next/router';
+import { useUser } from '@/store/useUser';
 
 const MobileNavigation = () => {
+  const { resetUserData } = useUser();
   const router = useRouter();
   const onLogout = async () => {
     deleteCookie('token', { path: '/' });
+    resetUserData();
     router.push('/login');
   };
 

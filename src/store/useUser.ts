@@ -8,6 +8,7 @@ type State = {
 
 type Actions = {
   getUserData: () => void;
+  resetUserData: () => void;
 };
 
 export const useUser = create<State & Actions>((set) => ({
@@ -20,5 +21,8 @@ export const useUser = create<State & Actions>((set) => ({
     } else {
       set(() => ({ userData: data }));
     }
+  },
+  resetUserData: async () => {
+    set(() => ({ userData: undefined }));
   },
 }));

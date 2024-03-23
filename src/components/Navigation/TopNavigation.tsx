@@ -5,10 +5,11 @@ import { useRouter } from 'next/router';
 import { useUser } from '@/store/useUser';
 
 const TopNavigation = () => {
-  const { userData } = useUser();
+  const { userData, resetUserData } = useUser();
   const router = useRouter();
   const onLogout = async () => {
     deleteCookie('token', { path: '/' });
+    resetUserData();
     router.push('/login');
   };
 

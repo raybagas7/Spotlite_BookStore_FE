@@ -61,12 +61,12 @@ const LoginForm = () => {
       <div className="space-y-3 lg:space-y-5">
         <p className="text-center text-2xl font-bold text-primary">SpotBook</p>
         <div className="flex flex-col justify-center gap-1 text-center text-xs lg:flex-row lg:text-base">
-          <p className="hidden lg:block">{`If you already have an account,`}</p>
+          <p className="hidden lg:block">{`If you don't have an account`}</p>
           <Link
-            href={'/login'}
+            href={'/signup'}
             className="text-primary font-bold transition-transform hover:underline hover:transition-transform"
           >
-            Login Here
+            Signup Here
           </Link>
         </div>
         <HeaderLined className="text-sm lg:text-base">LogIn</HeaderLined>
