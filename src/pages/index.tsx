@@ -2,6 +2,8 @@ import { ReactElement, useEffect, useState } from 'react';
 import MainLayout from '@/components/Layout/MainLayout';
 import { fetchBooks } from '@/actions/fetch-books';
 import LoadMore from '@/components/LoadMore';
+import { useUser } from '@/store/useUser';
+import AsideInformation from '@/components/AsideInformation';
 
 export default function Home() {
   const [books, setBooks] = useState<Book[]>([]);
@@ -22,6 +24,7 @@ export default function Home() {
   }
   return (
     <main className="container mx-auto p-4 min-h-screen max-w-5xl mt-10">
+      <AsideInformation />
       <h1 className="text-center my-4 text-5xl font-bold">BOOK ON SALE</h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
         <LoadMore books={books} setBooks={setBooks} />
