@@ -15,10 +15,10 @@ const MobileNavigation = () => {
   return (
     <div className="fixed bottom-0 z-50 w-full rounded-t-xl border-t bg-background py-1.5 shadow md:hidden">
       <ul className="flex w-full items-center justify-evenly gap-5 ">
-        <Link href={'/attendance'}>
+        <Link href={'/order'}>
           <li className="flex cursor-pointer flex-col items-center text-xs transition-colors hover:text-primary">
             <FaUserAlt className="h-5 w-5" />
-            <p>Attendance</p>
+            <p>Order</p>
           </li>
         </Link>
         <Link href={'/'}>

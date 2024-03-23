@@ -26,9 +26,9 @@ const TopNavigation = () => {
               Home
             </li>
           </Link>
-          <Link href="/attendance">
+          <Link href="/order">
             <li className="cursor-pointer font-bold transition-colors hover:text-primary">
-              Attendance
+              Order
             </li>
           </Link>
           <button onClick={onLogout}>
