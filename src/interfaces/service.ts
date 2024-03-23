@@ -22,6 +22,10 @@ interface NewBookPayload {
   tags: string[];
 }
 
+interface NewTagPayload {
+  name: string;
+}
+
 interface UserData {
   id: string;
   name: string;

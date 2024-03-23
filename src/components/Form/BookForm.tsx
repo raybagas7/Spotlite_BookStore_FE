@@ -19,6 +19,7 @@ import Tags from '../Tags';
 import Image from 'next/image';
 import services from '@/utils/service';
 import { toast } from 'sonner';
+import TagForm from './TagForm';
 
 const BookForm = () => {
   const [tags, setTags] = useState<string[]>([]);
@@ -65,7 +66,7 @@ const BookForm = () => {
       if (error) {
         toast.warning(message);
       } else {
-        toast.success(message);
+        toast.success(`${values.title} book has been published`);
         router.push('/');
       }
     }
@@ -92,6 +93,8 @@ const BookForm = () => {
             className="object-contain h-48 brightness-[35%]"
           />
         </div>
+        <TagForm />
+
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-1">
             <FormField

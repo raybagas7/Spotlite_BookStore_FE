@@ -1,41 +1,45 @@
-import services from '@/utils/service';
-import React, { useEffect, useState } from 'react';
-import { toast } from 'sonner';
+import React, { useEffect } from 'react';
 import LabeledContainer from './LabeledContainer';
 import TagBadge from './TagBadge';
+import { useTag } from '@/store/useTag';
 
 interface ITags {
   updateTags: (tag_id: string) => void;
 }
 
 const Tags = ({ updateTags }: ITags) => {
-  const [tags, setTags] = useState<Tag[]>([]);
+  const { tags, getTags } = useTag();
   useEffect(() => {
-    const getTags = async () => {
-      const { error, data, message } = await services.getTags();
+    if (!tags) {
+      getTags();
+    }
+  }, [tags, getTags]);
 
-      if (error) {
-        toast(message);
-      }
-      if (data) {
-        setTags(data);
-      }
-    };
-
-    getTags();
-  }, []);
+  if (!tags) {
+    return null;
+  }
 
   return (
     <div>
-      <LabeledContainer label="Choose Tags" className="flex mt-5 gap-1">
-        {tags.map((tag) => (
-          <TagBadge
-            updateTags={updateTags}
-            key={tag.tag_id}
-            tag_id={tag.tag_id}
-            name={tag.name}
-          />
-        ))}
+      <LabeledContainer
+        label={
+          <p>
+            Choose Tags
+            <span className="text-red-500">*</span>
+          </p>
+        }
+        className="mt-5"
+      >
+        <div className="flex gap-1 flex-wrap">
+          {tags.map((tag) => (
+            <TagBadge
+              updateTags={updateTags}
+              key={tag.tag_id}
+              tag_id={tag.tag_id}
+              name={tag.name}
+            />
+          ))}
+        </div>
       </LabeledContainer>
     </div>
   );

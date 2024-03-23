@@ -31,6 +31,10 @@ const TopNavigation = () => {
             </p>
           </div>
         </div>
+        <div className="flex font-bold md:hidden w-full justify-end items-center gap-3">
+          <p className="text-primary ">Your point:</p>
+          <p>{userData?.point}</p>
+        </div>
         <ul className="flex w-full justify-end gap-5 max-md:hidden">
           <Link href="/">
             <li className="cursor-pointer font-bold transition-colors hover:text-primary">

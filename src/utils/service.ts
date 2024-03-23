@@ -87,6 +87,16 @@ const services = (() => {
     );
   };
 
+  const postNewTag = async (payload: NewTagPayload) => {
+    return fetchWithToken<Tag>(`${process.env.BASE_API_URL}/api/tags`, {
+      method: 'POST',
+      body: JSON.stringify(payload),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+  };
+
   return {
     postSignup,
     getUserData,
@@ -95,6 +105,7 @@ const services = (() => {
     deleteOrderBook,
     getTags,
     postNewBook,
+    postNewTag,
   };
 })();
 
