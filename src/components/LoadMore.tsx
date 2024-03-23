@@ -14,6 +14,7 @@ interface LoadMore {
 const LoadMore = ({ books, setBooks }: LoadMore) => {
   const [pagesLoaded, setPagesLoaded] = useState(1);
   const [keepLoad, setKeepload] = useState(true);
+  const [preventLoad, setPreventLoad] = useState(false);
 
   const { ref, inView } = useInView();
 
@@ -28,10 +29,14 @@ const LoadMore = ({ books, setBooks }: LoadMore) => {
       if (newBooks.length === 0) {
         setKeepload(false);
       }
+      setPreventLoad(false);
     };
     if (inView) {
       console.log('scrolled to the end');
-      loadMoreBooks();
+      if (!preventLoad) {
+        setPreventLoad(true);
+        loadMoreBooks();
+      }
     }
   }, [inView]);
 
