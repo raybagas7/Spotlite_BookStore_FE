@@ -1,3 +1,8 @@
+interface Tag {
+  tag_id: string;
+  name: string;
+}
+
 interface Book {
   book_id: string;
   title: string;
@@ -6,6 +11,7 @@ interface Book {
   writer_id: string;
   createdAt: string;
   updatedAt: string;
+  bookTags: Tag[];
 }
 
 interface BookOrder {

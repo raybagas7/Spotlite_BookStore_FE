@@ -92,6 +92,9 @@ const Books = ({ books, userData }: IBooksProps) => {
                   />
                 </div>
               )}
+              {book.bookTags.map((tag) => (
+                <p>{tag.name}</p>
+              ))}
             </CardFooter>
           </Card>
         ))
