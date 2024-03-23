@@ -20,12 +20,17 @@ import services from '@/utils/service';
 import { setCookie } from 'cookies-next';
 import { toast } from 'sonner';
 import { useRouter } from 'next/router';
+import { Switch } from '../ui/switch';
 
 const SignupForm = () => {
   const [showPasswod, setShowPassword] = useState<boolean>(false);
+  const [isAdmin, setIsAdmin] = useState(false);
   const router = useRouter();
   const onToggleShowPassword = () => {
     setShowPassword((prev) => !prev);
+  };
+  const onToggleIsAdmin = () => {
+    setIsAdmin((prev) => !prev);
   };
 
   const signupFormSchema = z.object({
@@ -54,7 +59,15 @@ const SignupForm = () => {
 
   async function onSubmit(values: z.infer<typeof signupFormSchema>) {
     // console.log(values);
-    const res = await services.postSignup(values);
+    const payload: SignUpPayload = {
+      ...values,
+    };
+
+    if (isAdmin) {
+      payload['role'] = 'admin';
+    }
+
+    const res = await services.postSignup(payload);
     if (res.error) {
       console.log(res.message);
     }
@@ -150,6 +163,12 @@ const SignupForm = () => {
             </div>
           </form>
         </Form>
+      </div>
+      <div className="flex gap-3 items-center mt-2">
+        <Switch checked={isAdmin} onClick={onToggleIsAdmin} />
+        <p className="text-xs font-bold">
+          Check this if you want to register as a Writer/Admin
+        </p>
       </div>
     </div>
   );

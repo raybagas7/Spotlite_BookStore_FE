@@ -2,6 +2,7 @@ interface SignUpPayload {
   name: string;
   email: string;
   password: string;
+  role?: 'admin';
 }
 interface LoginUpPayload {
   email: string;

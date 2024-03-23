@@ -31,12 +31,19 @@ const TopNavigation = () => {
             </p>
           </div>
         </div>
-        <ul className="flex items-center gap-5 max-md:hidden">
+        <ul className="flex w-full justify-end gap-5 max-md:hidden">
           <Link href="/">
             <li className="cursor-pointer font-bold transition-colors hover:text-primary">
               Home
             </li>
           </Link>
+          {userData?.role === 'admin' && (
+            <Link href="/add">
+              <li className="cursor-pointer font-bold transition-colors hover:text-primary">
+                Add Book
+              </li>
+            </Link>
+          )}
           <Link href="/order">
             <li className="cursor-pointer font-bold transition-colors hover:text-primary">
               Order

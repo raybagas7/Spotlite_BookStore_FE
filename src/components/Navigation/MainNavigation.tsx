@@ -5,9 +5,6 @@ import { useUser } from '@/store/useUser';
 import Link from 'next/link';
 import { IoMdLogIn } from 'react-icons/io';
 import { Toaster } from 'sonner';
-// import { useUser } from '@/store/user/useUser';
-// import AdminTopNavigation from './AdminTopNavigation';
-// import AdminMobileNavigation from './AdminMobileNavigation';
 
 const MainNavigation = () => {
   const { userData, getUserData } = useUser();
