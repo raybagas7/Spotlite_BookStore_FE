@@ -14,6 +14,7 @@ import services from '@/utils/service';
 import { toast } from 'sonner';
 import { useUser } from '@/store/useUser';
 import { delay } from '@/lib/utils';
+import { Badge } from './ui/badge';
 
 export interface IBooksProps {
   books: Book[] | null;
@@ -74,6 +75,17 @@ const Books = ({ books, userData }: IBooksProps) => {
             <CardFooter className="text-center flex flex-col">
               <CardTitle className="my-2">{book.title}</CardTitle>
               <CardDescription>Point: {book.point}</CardDescription>
+              <div className="flex mt-2 gap-2">
+                {book.bookTags.map((tag) => (
+                  <Badge
+                    variant="secondary"
+                    className="cursor-pointer hover:bg-primary"
+                    key={tag.tag_id}
+                  >
+                    {tag.name}
+                  </Badge>
+                ))}
+              </div>
               {userData && (
                 <div className="w-full rounded-b-xl mt-2">
                   <ButtonWithLoading
@@ -92,9 +104,6 @@ const Books = ({ books, userData }: IBooksProps) => {
                   />
                 </div>
               )}
-              {book.bookTags.map((tag) => (
-                <p>{tag.name}</p>
-              ))}
             </CardFooter>
           </Card>
         ))
